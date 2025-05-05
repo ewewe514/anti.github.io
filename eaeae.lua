@@ -96,3 +96,23 @@ tryMaximGunNearCastle()
 RunService.Heartbeat:Connect(BypassAC)
 Camera:GetPropertyChangedSignal("CameraType"):Connect(UpdateCamera)
 UpdateCamera()
+
+task.wait(1) -- Wait 1 second before executing task.spawn
+
+task.spawn(function()
+    while true do
+        for i, v in pairs(game.Players.LocalPlayer.PlayerGui:GetDescendants()) do
+            if v:IsA("TextLabel") and v.Text == "Shoot" then
+                v:FindFirstAncestor("ActionFrame"):Destroy()
+            end
+            if v.Name == "TurretGui" then
+                for _, x in pairs(v:GetChildren()) do
+                    x:Destroy()
+                end
+            end
+        end
+        task.wait(1) -- Wait 1 second before running again
+    end
+end)
+
+
